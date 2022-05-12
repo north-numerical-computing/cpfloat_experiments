@@ -1,0 +1,9 @@
+[submodule "deps/cpfloat"]
+	path = deps/cpfloat
+	url = git@github.com:north-numerical-computing/cpfloat.git
+[submodule "deps/FloatX"]
+	path = deps/FloatX
+	url = git@github.com:oprecomp/FloatX.git
+[submodule "deps/chop"]
+	path = deps/chop
+	url = git@github.com:higham/chop.git
