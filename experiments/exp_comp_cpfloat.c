@@ -11,6 +11,7 @@
 #include "cpfloat_binary32.h"
 #include "cpfloat_binary64.h"
 
+#include "exp_comp_init.h"
 #include "timing_fun.h"
 
 int main() {
@@ -18,16 +19,8 @@ int main() {
   /* Input parameters. */
   size_t i, j, k, l, n;
 
-  size_t nsizes = 28;
-  size_t *sizes = malloc(nsizes*sizeof(double));
-  size_t mult = 1;
-  for (i = 1; i <= 3; i++) {
-    mult *= 10;
-    for (j = 1; j < 10; j++)
-      sizes[9 * (i - 1) + (j - 1)] = mult * j;
-  }
-  sizes[9 * (i - 1)] = mult * 10;
-
+  size_t *sizes = malloc(NSIZES*sizeof(*sizes));
+  initialize_size_array(sizes);
   optstruct *fpopts = init_optstruct();
 
   strcpy(fpopts->format, "h");
@@ -59,7 +52,7 @@ int main() {
   FILE *fid_conv_noalloc_seq = fopen(outfile_conv_noalloc_seq, "w");
   const char outfile_op_seq[] = "./timing-clang-op-seq.dat";
   FILE *fid_op_seq = fopen(outfile_op_seq, "w");
-  for (i = 0; i < nsizes; i++) {
+  for (i = 0; i < NSIZES; i++) {
     n = sizes[i] * sizes[i];
     double *X = malloc(n * sizeof(*X));
     double *Y = malloc(n * sizeof(*Y));

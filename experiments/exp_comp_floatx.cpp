@@ -11,6 +11,8 @@
 #include <cstring>
 
 #include "floatx.hpp"
+
+#include "exp_comp_init.h"
 #include "timing_fun.h"
 
 template <short exp_bits, short sig_bits, typename backend_float>
@@ -149,16 +151,8 @@ void run_floatxr_test(short exp_bits, short sig_bits,
 int main() {
 
   /* Input parameters. */
-  const size_t nsizes = 28;
-  size_t sizes[nsizes];
-  size_t mult = 1;
-  size_t i, j;
-  for (i = 1; i <= 3; i++) {
-    mult *= 10;
-    for (j = 1; j < 10; j++)
-      sizes[9 * (i - 1) + (j - 1)] = mult * j;
-  }
-  sizes[9 * (i - 1)] = mult * 10;
+  size_t sizes[NSIZES];
+  initialize_size_array(sizes);
 
   constexpr size_t precision[3] = {11, 8, 11};
   constexpr size_t exponent[3] = {5, 8, 8};
@@ -179,11 +173,11 @@ int main() {
   FILE *fidx_conv_noalloc = fopen(outfile_fx_conv_noalloc, "w");
   const char outfile_fx_op[] = "./timing-floatx-op-seq.dat";
   FILE *fidx_op = fopen(outfile_fx_op, "w");
-  for (i = 0; i < nsizes; i++) {
+  for (size_t i = 0; i < NSIZES; i++) {
     size_t n = sizes[i] * sizes[i];
     double *X = new double[n];
     double *Y = new double[n];
-    for (j = 0; j < n; j++) { // generate normal numbers
+    for (size_t j = 0; j < n; j++) { // generate normal numbers
       X[j] = fmin + rand() / (double)RAND_MAX;
       Y[j] = fmin + rand() / (double)RAND_MAX;
     }
@@ -224,11 +218,11 @@ int main() {
   FILE *fidxr_conv_noalloc = fopen(outfile_fxr_conv_noalloc, "w");
   const char outfile_fxr_op[] = "./timing-floatxr-op-seq.dat";
   FILE *fidxr_op = fopen(outfile_fxr_op, "w");
-  for (i = 0; i < nsizes; i++) {
+  for (size_t i = 0; i < NSIZES; i++) {
     size_t n = sizes[i] * sizes[i];
     double *X = new double[n];
     double *Y = new double[n];
-    for (j = 0; j < n; j++) { // generate normal numbers
+    for (size_t j = 0; j < n; j++) { // generate normal numbers
       X[j] = fmin + rand() / (double)RAND_MAX;
       Y[j] = fmin + rand() / (double)RAND_MAX;
     }
