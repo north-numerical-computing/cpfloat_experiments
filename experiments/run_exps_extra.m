@@ -4,6 +4,18 @@
 %% Initialization
 storageformats = {'single', 'double'};
 
+%% Speedup cpfloat/chop (subnormals and binary32)
+storageformat = 'single';
+for generatesubnormals = [true,false]
+  exp_comp_chop
+end
+storageformat = 'double';
+generatesubnormals = true;
+exp_comp_chop
+
+%% Speedup of cpfloat/intlab (Figure 3)
+exp_comp_intlab
+
 %% Speedup cpfloat/chop, LU decomposition.
 exp_lu
 
