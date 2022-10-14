@@ -114,7 +114,7 @@ run_exp_overhead: $(BINDIR)exp_overhead $(DATDIR)
 
 # MATLAB experiments
 .PHONY: mexmat
-mexmat:
+mexmat: $(BINDIR)
 	cd $(CPFDIR); make mexmat
 	$(CP) $(CPFBINDIR)cpfloat.m $(CPFBINDIR)cpfloat.mex* $(BINDIR)
 
