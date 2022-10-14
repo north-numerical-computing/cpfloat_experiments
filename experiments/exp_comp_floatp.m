@@ -133,7 +133,7 @@ for k = 1:nformats
   end
 end
 
-plotcols = 2;
+plotcols = 3;
 plotrows = ceil(nformats/plotcols);
 for i = 1:nformats
   figure(1)
