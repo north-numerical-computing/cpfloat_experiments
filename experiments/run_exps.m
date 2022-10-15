@@ -16,10 +16,17 @@ storageformat = 'double';
 generatesubnormals = false;
 exp_comp_chop
 
-%% Speedup of cpfloat/intlab (Figure 3)
+%% Threads in speedup cpfloat/chop (Figure 3)
+storageformat = 'double';
+generatesubnormals = false;
+curr_num_threads = maxNumCompThreads();
+exp_comp_chop_threads
+maxNumCompThreads(curr_num_threads)
+
+%% Speedup of cpfloat/intlab (Figure 4)
 exp_comp_intlab
 
-%% Overhead of MATLAB interface (Figure 4, second and third columns)
+%% Overhead of MATLAB interface (Figure 5, second and third columns)
 exp_overhead
 
 % CPFloat - Custom Precision Floating-point numbers.
